@@ -1,4 +1,4 @@
-name: Publish alpha release
+name: Greet user on issue submission
 
 on:
   issues:
