@@ -2,7 +2,8 @@ name: Publish alpha release
 
 on:
   issues:
-    types: [created]
+    types: 
+      - created
 
 jobs:
 
