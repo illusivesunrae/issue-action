@@ -1,0 +1,16 @@
+name: Publish alpha release
+
+on:
+  issues:
+    types: [created]
+
+jobs:
+
+  greet-user:
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Build Changelog
+        uses: ./src/main.js
+        id: greet_user
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
