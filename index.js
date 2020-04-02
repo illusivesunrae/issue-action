@@ -10,7 +10,7 @@ const { thankYouMessage } = require('./dialogue');
 async function run() {
   try {
     const myToken = core.getInput('GITHUB_TOKEN', { required: true });
-    const owner = core.getInput('owner_name', { required: true });
+    //const owner = core.getInput('owner_name', { required: true });
     const repo = core.getInput('repo_name', { required: true });
     const username = core.getInput('issue_creator', { required: true });
 
@@ -27,7 +27,7 @@ async function run() {
     console.log(reply);
 
     await octokit.issues.createComment({
-      owner,
+      // owner,
       repo,
       issue_number: number,
       body: reply
