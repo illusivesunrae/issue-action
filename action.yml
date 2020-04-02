@@ -35,6 +35,14 @@ inputs:
     description: 'A personalized message requesting that the creator of the issue add more info'
     required: false
 
+  # Add issue to project board
+  issue_id:
+    description: 'The id of the issue'
+    required: false
+  project_column:
+    description: 'The column in a project board to add the issue to'
+    required: false
+
 runs:
   using: 'node12'
   main: 'index.js'

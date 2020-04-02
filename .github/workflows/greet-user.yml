@@ -16,9 +16,11 @@ jobs:
         with:
           issue_body: ${{ github.event.issue.body }}
           issue_creator: ${{ github.actor }}
+          issue_id: ${{ github.event.issue.id }}
           issue_number: ${{ github.event.issue.number }}
           min_length: 140
           owner_name: ${{ github.event.repository.owner.login }}
+          project_column: 1
           repo_name: ${{ github.event.repository.name }}
           request_info: "Thanks for opening this issue! We appreciate you helping make Rivet better. A member of the Rivet team will take a look at this issue shortly.\n\nIn the meantime, if you'd be willing to elaborate on your bug report or feature request a little bit, that would really help the Rivet team assess your issue. Links, screenshots, error messages — all great information that can give the Rivet team a hand. :smile:"
           response_body: "Thanks for opening this issue! We appreciate you helping make Rivet better. :raised_hands:\n\nA member of the Rivet team will take a look at this issue shortly. In the meantime, check out the [Rivet wiki](https://github.com/indiana-university/rivet-source/wiki) to learn more about our project management, issue tracking, and development processes."
