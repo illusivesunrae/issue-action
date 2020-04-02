@@ -13,7 +13,13 @@ async function run() {
     const username = core.getInput('issue_creator', { required: true });
     const customResponse = core.getInput('response');
 
-    console.log(customResponse);
+    // If we receive a custom response from the workflow, set a variable to it, otherwise, set the same variable to the default
+    let bodyText;
+    customResponse ? bodyText = customResponse : bodyText = thankYouMessage;
+
+    const reply = `@${username} ${bodyText}`;
+
+    console.log(reply);
 
   } catch (error) {
     core.setFailed(error.message);
