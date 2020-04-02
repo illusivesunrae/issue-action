@@ -17,6 +17,6 @@ jobs:
           issue_creator: ${{ github.actor }}
           issue_number: ${{ github.number }}
           # owner_name: ${{ github.repository_owner }}
-          repo_name: ${{ github.head_ref }}
+          # repo_name: ${{ github.head_ref }}
           response: "Thanks for opening this issue! We appreciate you helping make Rivet better. :raised_hands:\n\nA member of the Rivet team will take a look at this issue shortly. In the meantime, check out the [Rivet wiki](https://github.com/indiana-university/rivet-source/wiki) to learn more about our project management, issue tracking, and development processes."
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token

@@ -10,9 +10,9 @@ inputs:
   # owner_name:
   # description: 'The name of the repository owner.'
   # required: true
-  repo_name:
-    description: 'The name of the repository.'
-    required: true
+  # repo_name:
+  # description: 'The name of the repository.'
+  # required: true
   response_body:
     description: 'A personalized message to override the default response'
     required: false
