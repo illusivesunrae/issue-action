@@ -1,12 +1,18 @@
 name: 'Greet user on issue submission'
 description: 'Auto-reply to new issue submissions'
 inputs:
-  response:
-    description: 'A personalized message to override the default response'
-    required: false
   issue_creator:
     description: 'The username of the creator of the issue'
     required: true
+  issue_number:
+    description: 'The number of the issue being updated.'
+    required: true
+  repo_name:
+    description: 'The name of the repository.'
+    required: true
+  response_body:
+    description: 'A personalized message to override the default response'
+    required: false
   GITHUB_TOKEN:
     description: 'The value of the secret GitHub token'
     required: true
