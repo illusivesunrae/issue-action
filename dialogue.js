@@ -5,4 +5,6 @@
 // /webhooks/issues.opened/thanks
 const thankYouMessage = `Thanks for opening this issue! We appreciate you helping make our project better. \n\nA member of our team will take a look at this issue shortly.`;
 
-module.exports = thankYouMessage;
+module.exports = {
+  thankYouMessage
+}
