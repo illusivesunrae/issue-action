@@ -2,15 +2,15 @@ name: Greet user on issue submission
 
 on:
   issues:
-    types: 
+    types:
       - opened
 
 jobs:
-
   greet-user:
     runs-on: ubuntu-16.04
     steps:
-      - name: Build Changelog
+      - uses: actions/checkout@v1
+      - name: Greet user
         uses: ./src/main.js
         id: greet_user
         with:
