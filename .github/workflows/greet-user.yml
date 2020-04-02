@@ -1,0 +1,18 @@
+name: Greet user on issue submission
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  greet-user:
+    runs-on: ubuntu-16.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Greet user on issue submission
+        uses: ./
+        id: greet_user
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          response: "@{{user}} Thanks for opening this issue! We appreciate you helping make Rivet better. :raised_hands:\n\nA member of the Rivet team will take a look at this issue shortly. In the meantime, check out the [Rivet wiki](https://github.com/indiana-university/rivet-source/wiki) to learn more about our project management, issue tracking, and development processes."
