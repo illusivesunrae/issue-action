@@ -9,7 +9,12 @@ const { infoRequestMessage, thankYouMessage } = require('./dialogue');
 
 async function run() {
   try {
+    // Variables specified within action.yml, and passed by workflow yml
+
+    // This token is provided by Actions
     const myToken = core.getInput('GITHUB_TOKEN', { required: true });
+
+    // Required variables
     const number = core.getInput('issue_number', { required: true });
     const owner = core.getInput('owner_name', { required: true });
     const repo = core.getInput('repo_name', { required: true });
@@ -23,26 +28,27 @@ async function run() {
     const minLength = core.getInput('min_length') || false;
     const projectColumn = core.getInput('project_column') || false;
 
+    // Create a new instance of octokit rest API
+    // https://octokit.github.io/rest.js/v17/
     const octokit = new GitHub(myToken);
 
 
     let bodyText;
-    // if minLength && issueBody -> check length of issueBody
+    // If workflow establishes minimum length for issue body
     if ((minLength && issueBody) && (issueBody.length < minLength)) {
+      // If a custom message has been provided for short issues - use; otherwise, use default
       customRequest ? bodyText = customRequest : 
       bodyText = infoRequestMessage;
     } else {
+      // If a custom message has been provided - use; otherwise, use default
       customResponse ? bodyText = customResponse : 
       bodyText = thankYouMessage;
     }
 
-
-    // If we receive a custom response from the workflow, set a variable to it, otherwise, set the same variable to the default
-    
-    
-
+    // Concatenate issue creator username and comment text
     const reply = `@${username} ${bodyText}`;
 
+    // Create new comment
     await octokit.issues.createComment({
       owner,
       repo,
@@ -50,13 +56,14 @@ async function run() {
       body: reply
     });
 
-    // add issue to project
-
-    await octokit.projects.createCard({
-      column_id: projectColumn,
-      content_id: issueID,
-      content_type: "Issue"
-    });
+    // If a project column and issue id are provided, add issue to project
+    if (projectColumn && issueID) {
+      await octokit.projects.createCard({
+        column_id: projectColumn,
+        content_id: issueID,
+        content_type: "Issue"
+      });
+    }
 
   } catch (error) {
     core.setFailed(error.message);
