@@ -21,8 +21,7 @@ async function run() {
 
     const reply = `@${username} ${bodyText}`;
 
-    console.log(thankYouMessage);
-    // console.log(reply);
+    console.log(reply);
 
   } catch (error) {
     core.setFailed(error.message);
