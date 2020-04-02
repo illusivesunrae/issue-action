@@ -5,7 +5,7 @@
 
 const core = require('@actions/core');
 const { GitHub } = require('@actions/github');
-const { thankYouMessage } = require('./dialogue');
+const { infoRequestMessage, thankYouMessage } = require('./dialogue');
 
 async function run() {
   try {
@@ -17,15 +17,29 @@ async function run() {
 
     // Set custom response to core.getInput('response'); or false
     const customResponse = core.getInput('response_body') || false;
+    const issueBody = core.getInput('issue_body') || false;
+    const minLength = core.getInput('min_length') || false;
+    const customRequest = core.getInput('request_info') || false;
     const octokit = new GitHub(myToken);
 
-    // If we receive a custom response from the workflow, set a variable to it, otherwise, set the same variable to the default
+  // customResponse thankYouMessage customRequest infoRequestMessage
+
     let bodyText;
-    customResponse ? bodyText = customResponse : bodyText = thankYouMessage;
+    // if minLength && issueBody -> check length of issueBody
+    if ((minLength && issueBody) && (issueBody.length < minLength)) {
+      customRequest ? bodyText = customRequest : 
+      bodyText = infoRequestMessage;
+    } else {
+      customResponse ? bodyText = customResponse : 
+      bodyText = thankYouMessage;
+    }
+
+
+    // If we receive a custom response from the workflow, set a variable to it, otherwise, set the same variable to the default
+    
+    
 
     const reply = `@${username} ${bodyText}`;
-
-    console.log(reply);
 
     await octokit.issues.createComment({
       owner,
@@ -34,48 +48,11 @@ async function run() {
       body: reply
     });
 
+    // add issue to project
+
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
 run();
-
-// Import dialogue options overrides
-// const newIssue = async (options) => {
-//   // Override defaults if custom options exist
-//   const defaultOptions = {
-//     response: thanks
-//   }
-
-//   const settings = {
-//     ...defaultOptions,
-//     ...options
-//   }
-
-//   // Call GitHub API
-//   // Check the length of the issue
-//   // call GitHub API
-//     // if long enough post a thank you response
-//     // else if too short, post a comment requesting more info
-
-//   console.log('This ran.');
-
-// /*
-//   app.on('issues.opened', async context => {
-//     const issueBody = context.payload.issue.body
-//     const issueBodylengthThreshold = 140
-    
-//     if (issueBody.length >= issueBodylengthThreshold) {
-//       postThankYouComment(context, dialogue.thanks)
-//     } else {
-//       postThanksButNeedMoreInfoComment(context, dialogue.emptyBody)
-//     }
-//   })
-//   */
-
-//   // The action should add the issue to the project
-
-// }
-
-// export default newIssue;

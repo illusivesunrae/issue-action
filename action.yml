@@ -5,20 +5,36 @@ inputs:
     description: 'The username of the creator of the issue'
     required: true
   issue_number:
-    description: 'The number of the issue being updated.'
+    description: 'The number of the issue being updated'
     required: true
   owner_name:
-    description: 'The name of the repository owner.'
+    description: 'The name of the repository owner'
     required: true
   repo_name:
-    description: 'The name of the repository.'
+    description: 'The name of the repository'
     required: true
-  response_body:
-    description: 'A personalized message to override the default response'
-    required: false
   GITHUB_TOKEN:
     description: 'The value of the secret GitHub token'
     required: true
+
+  # Optional fields
+
+  # Override default message
+  response_body:
+    description: 'A personalized message to override the default response'
+    required: false
+
+  # Enforce minimum viable issue length
+  issue_body:
+    description: 'The text of the new issue'
+    required: false
+  min_length:
+    description: 'The smallest acceptable length for a new issue'
+    required: false
+  request_info:
+    description: 'A personalized message requesting that the creator of the issue add more info'
+    required: false
+
 runs:
   using: 'node12'
   main: 'index.js'
