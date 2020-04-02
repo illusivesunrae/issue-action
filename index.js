@@ -10,13 +10,13 @@ const { thankYouMessage } = require('./dialogue');
 async function run() {
   try {
     const myToken = core.getInput('GITHUB_TOKEN', { required: true });
-    const octokit = new GitHub(myToken);
     const owner = core.getInput('owner_name', { required: true });
     const repo = core.getInput('repo_name', { required: true });
     const username = core.getInput('issue_creator', { required: true });
 
     // Set custom response to core.getInput('response'); or false
     const customResponse = core.getInput('response_body') || false;
+    const octokit = new GitHub(myToken);
 
     // If we receive a custom response from the workflow, set a variable to it, otherwise, set the same variable to the default
     let bodyText;
