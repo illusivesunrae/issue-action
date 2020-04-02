@@ -15,14 +15,16 @@ async function run() {
     const repo = core.getInput('repo_name', { required: true });
     const username = core.getInput('issue_creator', { required: true });
 
-    // Set custom response to core.getInput('response'); or false
+    // Optional variables
+    const customRequest = core.getInput('request_info') || false;
     const customResponse = core.getInput('response_body') || false;
     const issueBody = core.getInput('issue_body') || false;
+    const issueID = core.getInput('issue_id') || false;
     const minLength = core.getInput('min_length') || false;
-    const customRequest = core.getInput('request_info') || false;
+    const projectColumn = core.getInput('project_column') || false;
+
     const octokit = new GitHub(myToken);
 
-  // customResponse thankYouMessage customRequest infoRequestMessage
 
     let bodyText;
     // if minLength && issueBody -> check length of issueBody
@@ -49,6 +51,12 @@ async function run() {
     });
 
     // add issue to project
+
+    await octokit.projects.createCard({
+      column_id: projectColumn,
+      content_id: issueID,
+      content_type: "Issue"
+    });
 
   } catch (error) {
     core.setFailed(error.message);
