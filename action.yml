@@ -1,0 +1,12 @@
+name: 'Greet user on issue submission'
+description: 'Auto-reply to new issue submissions'
+inputs:
+  response:
+    description: 'A personalized message to override the default response'
+    required: false
+  GITHUB_TOKEN:
+    description: 'The value of the secret GitHub token'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
