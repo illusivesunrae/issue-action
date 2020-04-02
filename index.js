@@ -11,7 +11,9 @@ async function run() {
   try {
     const myToken = core.getInput('GITHUB_TOKEN', { required: true });
     const username = core.getInput('issue_creator', { required: true });
-    const customResponse = core.getInput('response');
+
+    // Set custom response to core.getInput('response'); or false
+    const customResponse = core.getInput('response') || false;
 
     // If we receive a custom response from the workflow, set a variable to it, otherwise, set the same variable to the default
     let bodyText;
