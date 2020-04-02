@@ -5,14 +5,15 @@
 
 const core = require('@actions/core');
 const { GitHub } = require('@actions/github');
-const { thanks } = require('./dialogue');
+const { thankYouMessage } = require('./dialogue');
 
 async function run() {
   try {
     const myToken = core.getInput('GITHUB_TOKEN', { required: true });
-    const response = core.getInput('response');
+    const username = core.getInput('issue_creator', { required: true });
+    const customResponse = core.getInput('response');
 
-    console.log(response);
+    console.log(customResponse);
 
   } catch (error) {
     core.setFailed(error.message);

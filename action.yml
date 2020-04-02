@@ -4,6 +4,9 @@ inputs:
   response:
     description: 'A personalized message to override the default response'
     required: false
+  issue_creator:
+    description: 'The username of the creator of the issue'
+    required: true
   GITHUB_TOKEN:
     description: 'The value of the secret GitHub token'
     required: true
