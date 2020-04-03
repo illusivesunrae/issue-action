@@ -59,6 +59,7 @@ async function run() {
     // If a project column and issue id are provided, add issue to project
     if (projectColumn && issueID) {
       await octokit.projects.createCard({
+        project_id: 1,
         column_id: projectColumn,
         content_id: issueID,
         content_type: "Issue"
